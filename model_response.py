@@ -9,7 +9,6 @@ def ask_llm(prompt: str, context: list = None) -> tuple:
     Send prompt to LLM with optional context.
     Returns (response_text, new_context) tuple.
     """
-    print(context)
 
     payload = {
         "model": MODEL_NAME,
@@ -36,10 +35,12 @@ def ask_llm(prompt: str, context: list = None) -> tuple:
                 except Exception as e:
                     print(f"[Stream error: {e}]")
         print()
+        print("Context:", context)
         return reply.strip(), new_context
     else:
         error = f"Error: {response.status_code} - {response.text}"
         print(error)
+        print("Context:", context)
         return error, None
 
 if __name__ == "__main__":
